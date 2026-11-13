@@ -8,6 +8,11 @@ This is a class project from 2022 to 2024. The code is kept close to what was or
 submitted. The only changes are two fixes to the vehicle screen, listed under
 [Changes from the original](#changes-from-the-original).
 
+> **Known issues.** This is a class project and it has some flaws that were left as written:
+> hardcoded logins, tour totals that leave out the package rate, a Vehicle Type box that goes
+> blank on the Rent Calculation screen, and a wrong message when a driver ID is not found.
+> Details are under [Known issues](#known-issues).
+
 ## Screenshots
 
 All screenshots were taken from the running application.
