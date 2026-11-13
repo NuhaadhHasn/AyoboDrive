@@ -1,0 +1,11 @@
+# IDE caches (Rider also caches database connection info and schemas here)
+.idea/
+.vs/
+*.user
+*.suo
+*.DotSettings.user
+
+# Build output
+[Bb]in/
+[Oo]bj/
+packages/
