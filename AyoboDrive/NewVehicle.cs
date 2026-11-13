@@ -21,6 +21,7 @@ namespace AyoboDrive
         {
             vehicleIdTextBox.Text = "";
             vehicleNameTextBox.Text = "";
+            vehicleTypeTextBox.Text = "";
             licenceNumberTextBox.Text = "";
             noOfSeatsComboxBox.Text = "";
             dayRateTextBox.Text = "";
@@ -39,10 +40,13 @@ namespace AyoboDrive
                 sqlCommand.Connection = conn;
                 sqlCommand.CommandType = CommandType.Text;
                 sqlCommand.CommandText =
-                    "INSERT INTO newVehicle VALUES (@vehicleId, @vehicleName, @licenceNumber, @numberOfSeats, @dayRate," +
-                    " @weekRate, @monthRate,@driverRate ,@previousReading)";
+                    "INSERT INTO newVehicle (vehicleId, vehicleName, vehicleType, licenceNumber, numberOfSeats, dayRate," +
+                    " weekRate, monthRate, driverRate, previousReading) " +
+                    "VALUES (@vehicleId, @vehicleName, @vehicleType, @licenceNumber, @numberOfSeats, @dayRate," +
+                    " @weekRate, @monthRate, @driverRate, @previousReading)";
                 sqlCommand.Parameters.AddWithValue("@vehicleId", int.Parse(vehicleIdTextBox.Text));
                 sqlCommand.Parameters.AddWithValue("@vehicleName", vehicleNameTextBox.Text);
+                sqlCommand.Parameters.AddWithValue("@vehicleType", vehicleTypeTextBox.Text);
                 sqlCommand.Parameters.AddWithValue("@licenceNumber", licenceNumberTextBox.Text);
                 sqlCommand.Parameters.AddWithValue("@numberOfSeats", noOfSeatsComboxBox.Text);
                 sqlCommand.Parameters.AddWithValue("@dayRate", dayRateTextBox.Text);
@@ -51,7 +55,7 @@ namespace AyoboDrive
                 sqlCommand.Parameters.AddWithValue("@driverRate", driverRateTextBox.Text);
                 sqlCommand.Parameters.AddWithValue("@previousReading", previousReadingTextBox.Text);
                 sqlCommand.ExecuteNonQuery();
-                MessageBox.Show("New Driver Created", "New Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("New Vehicle Created", "New Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearFields();
                 conn.Close();
             }
@@ -73,11 +77,13 @@ namespace AyoboDrive
                 sqlCommand.CommandType = CommandType.Text;
                 sqlCommand.CommandText =
                     "UPDATE newVehicle SET vehicleId = @vehicleId, vehicleName = @vehicleName, " +
+                    "vehicleType = @vehicleType, " +
                     "licenceNumber = @licenceNumber, numberOfSeats = @numberOfSeats, dayRate = @dayRate, " +
                     "weekRate = @weekRate, monthRate = @monthRate ,driverRate = @driverRate ,previousReading = @previousReading " +
                     "WHERE vehicleId = @vehicleId";
                 sqlCommand.Parameters.AddWithValue("@vehicleId", int.Parse(vehicleIdTextBox.Text));
                 sqlCommand.Parameters.AddWithValue("@vehicleName", vehicleNameTextBox.Text);
+                sqlCommand.Parameters.AddWithValue("@vehicleType", vehicleTypeTextBox.Text);
                 sqlCommand.Parameters.AddWithValue("@licenceNumber", licenceNumberTextBox.Text);
                 sqlCommand.Parameters.AddWithValue("@numberOfSeats", noOfSeatsComboxBox.Text);
                 sqlCommand.Parameters.AddWithValue("@dayRate", dayRateTextBox.Text);
@@ -86,7 +92,7 @@ namespace AyoboDrive
                 sqlCommand.Parameters.AddWithValue("@driverRate", driverRateTextBox.Text);
                 sqlCommand.Parameters.AddWithValue("@previousReading", previousReadingTextBox.Text);
                 sqlCommand.ExecuteNonQuery();
-                MessageBox.Show("Package Updated", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Vehicle Updated", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearFields();
                 conn.Close();
             }
@@ -112,19 +118,20 @@ namespace AyoboDrive
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
                 if (sqlDataReader.Read())
                 {
-                    vehicleIdTextBox.Text = sqlDataReader[0].ToString();
-                    vehicleNameTextBox.Text = sqlDataReader[1].ToString();
-                    licenceNumberTextBox.Text = sqlDataReader[2].ToString();
-                    noOfSeatsComboxBox.Text = sqlDataReader[3].ToString();
-                    dayRateTextBox.Text = sqlDataReader[4].ToString();
-                    weekRateTextBoc.Text = sqlDataReader[5].ToString();
-                    monthRateTextBox.Text = sqlDataReader[6].ToString();
-                    driverRateTextBox.Text = sqlDataReader[7].ToString();
-                    previousReadingTextBox.Text = sqlDataReader[8].ToString();
+                    vehicleIdTextBox.Text = sqlDataReader["vehicleId"].ToString();
+                    vehicleNameTextBox.Text = sqlDataReader["vehicleName"].ToString();
+                    vehicleTypeTextBox.Text = sqlDataReader["vehicleType"].ToString();
+                    licenceNumberTextBox.Text = sqlDataReader["licenceNumber"].ToString();
+                    noOfSeatsComboxBox.Text = sqlDataReader["numberOfSeats"].ToString();
+                    dayRateTextBox.Text = sqlDataReader["dayRate"].ToString();
+                    weekRateTextBoc.Text = sqlDataReader["weekRate"].ToString();
+                    monthRateTextBox.Text = sqlDataReader["monthRate"].ToString();
+                    driverRateTextBox.Text = sqlDataReader["driverRate"].ToString();
+                    previousReadingTextBox.Text = sqlDataReader["previousReading"].ToString();
                 }
                 else
                 {
-                    MessageBox.Show("Package Not Found");
+                    MessageBox.Show("Vehicle Not Found");
                 }
 
                 conn.Close();

@@ -250,7 +250,8 @@ namespace AyoboDrive
             this.searchButton.TabIndex = 10;
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = false;
-            // 
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            //
             // updateButton
             // 
             this.updateButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(27)))), ((int)(((byte)(36)))));
